@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './styles/App.css';
 import React from 'react';
 import {nanoid} from 'nanoid'
@@ -7,26 +7,29 @@ import Question from './components/Question';
 function App() {
 
   const [gameStart, setGameStart] = React.useState(false)
-  const [quizData, setQuizData] = React.useState({})
+  const [quizData, setQuizData] = React.useState([])
+
 
   function setUpQuestions(questions) {
-    const newArray = questions.map(prev => ({...prev, pickedAnswer : "", key = {nanoid()}}))
+
+    const newArray = questions.map(prev => ({...prev, pickedAnswer : "", key : nanoid()}))
     setQuizData(newArray)
   }
+
 
   function StartGame() {
     setGameStart(true)
   }
 
-  function setPickedAnswer(key){
-
+  function setPickedAnswer(key, e){
+    setQuizData(prev => prev.map(prev => (prev.key === key ? {...prev, pickedAnswer : e.target.innerText } : prev)))
   }
   
   const questions = quizData.map(question => {
     return (
       <Question 
         question = {question}
-        handleClick = {() => {setPickedAnswer(question.key)}}
+        handleClick = {(e) => {setPickedAnswer(question.key, e)}}
         key = {question.key}
       />
     )
@@ -38,6 +41,7 @@ function App() {
       .then(res => res.json())
       .then(data => setUpQuestions(data.results) )
     },[])
+
   return (
     <main className="App">
       <div className='app--content'>
@@ -48,6 +52,12 @@ function App() {
             <p>Test your kwowledge on general level question across different topics</p>
             <button className='startButton' onClick={StartGame}>Start Quiz</button>
           </div>
+        }
+        {
+          gameStart
+            &&
+          questions
+
         }
 
       </div>
