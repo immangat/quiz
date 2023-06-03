@@ -3,6 +3,11 @@ import './styles/App.css';
 import React from 'react';
 import {nanoid} from 'nanoid'
 import Question from './components/Question';
+import * as PropTypes from "prop-types";
+import StartScreen  from "./components/StartScreen";
+
+
+StartScreen.propTypes = {onClick: PropTypes.func};
 
 function App() {
 
@@ -17,7 +22,7 @@ function App() {
   }
 
 
-  function StartGame() {
+  function startGame() {
     setGameStart(true)
   }
 
@@ -47,17 +52,26 @@ function App() {
       <div className='app--content'>
         {
           !gameStart &&
-          <div className='startScreen'>
-            <h1>Quizzical</h1>
-            <p>Test your kwowledge on general level question across different topics</p>
-            <button className='startButton' onClick={StartGame}>Start Quiz</button>
-          </div>
+
+              <div className="startScreen">
+                <h1>Quizzical</h1>
+                <p>Test your kwowledge on general level question across different topics</p>
+                <button className="startButton" onClick={startGame}>Start Quiz</button>
+              </div>
+
         }
         {
           gameStart
             &&
-          questions
+            <div className="questions">
+              {questions}
+            </div>
 
+        }
+        {
+          gameStart
+            &&
+            <button className="startButton">Check Answers</button>
         }
 
       </div>

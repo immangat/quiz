@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/questions.css'
 
 
 export default function Question(props){
@@ -6,10 +7,13 @@ export default function Question(props){
     const question = props.question
     let answersArray = question.incorrect_answers
     answersArray.push(question.correct_answer)
+    const parser = new DOMParser();
+    const decodedString = parser.parseFromString(`<!doctype html><body>${question.question}`, 'text/html').body.textContent;
+
 
     return(
         <div className="question">
-            <h2>{question.question.replaceAll("&quot;", " \"")}</h2>
+            <h2>{decodedString}</h2>
                 {question.type === 'boolean' ?
                     <div className="question--answers">
                         <button className="options" id="true">True</button>
