@@ -39,7 +39,7 @@ function App() {
       />
     )
   })
-  console.log(quizData)
+
   React.useEffect(
     () => {
       fetch("https://opentdb.com/api.php?amount=5")
