@@ -26,10 +26,15 @@ function App() {
     setGameStart(true)
   }
 
-  function setPickedAnswer(key, e){
-    setQuizData(prev => prev.map(prev => (prev.key === key ? {...prev, pickedAnswer : e.target.innerText } : prev)))
+  function setPickedAnswer(key, e) {
+    setQuizData(prev => prev.map(prevItem => (
+        prevItem.key === key
+            ? { ...prevItem, pickedAnswer: e.target.innerText === prevItem.pickedAnswer ? "" : e.target.innerText }
+            : prevItem
+    )));
   }
-  
+
+
   const questions = quizData.map(question => {
     return (
       <Question 
