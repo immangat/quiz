@@ -6,15 +6,14 @@ import {nanoid} from "nanoid";
 
 export default function Question(props) {
     const question = props.question
-    let {incorrect_answers : answersArray} = question
-    let {correct_answer } = question
+    console.log(question)
+    let {incorrect_answers : answersArray, correct_answer, checkedAnswer } = question
     answersArray.push(correct_answer)
     const [options, setOptions] = React.useState(makeOptionsObject())
 
     function makeOptionsObject() {
 
         return answersArray.map(option => {
-            console.log( "inside making the object: " + `${question.pickedAnswer === option}`)
             return (
             {
                 key: nanoid(),
@@ -35,9 +34,7 @@ export default function Question(props) {
 
     const buttons = options.map(object =>
 
-
     {
-        console.log("Inside Buttons: " + object.picked)
 
         return (
             <Option
@@ -45,6 +42,8 @@ export default function Question(props) {
                 value={object.option}
                 handleClick={(e) => props.handleClick(e)}
                 picked={question.pickedAnswer === object.option}
+                correct = {object.option === correct_answer}
+                checked = {checkedAnswer}
             />
         )}
     )

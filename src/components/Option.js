@@ -11,8 +11,23 @@ function Option(props){
         setIsHover(false);
     };
 
+    function decideColor(){
+        var color
+        if(props.correct && props.checked){
+            color = "#94D7A2"
+        } else if(props.picked && props.checked){
+            color = "#F8BCBC"
+        }
+
+        if((props.picked || isHover) && !props.checked){
+            color = "#D6DBF5"
+        } else if(!props.checked){
+            color = "white"
+        }
+        return color
+    }
     const styles = {
-        backgroundColor : props.picked || isHover ? "#D6DBF5" : "white",
+        backgroundColor : `${decideColor()}`
 
     }
     return(

@@ -1,4 +1,3 @@
-
 import './styles/App.css';
 import React from 'react';
 import {nanoid} from 'nanoid'
@@ -13,11 +12,17 @@ function App() {
   const [loading, setLoading] = React.useState(false)
   const [startScreen, setStartScreen] = React.useState(true)
   const [isInitialRender, setIsInitialRender] = React.useState(true);
+  const [checkAnswer, setCheckAnswer] = React.useState(
+      {
+                  number_of_correct_answers: 0,
+                  checkedAnswer : false
+                }
+  )
 
 
   function setUpQuestions(questions) {
 
-    const newArray = questions.map(prev => ({...prev, pickedAnswer : "", key : nanoid()}))
+    const newArray = questions.map(prev => ({...prev, pickedAnswer : "", key : nanoid(), checkedAnswer : checkAnswer.checkedAnswer}))
     setQuizData(newArray)
   }
 
@@ -45,6 +50,26 @@ function App() {
       />
     )
   })
+
+  function checkAnswers(){
+    const correctQuestions = quizData.filter(question =>
+    {
+      const {pickedAnswer, correct_answer } = question
+      return pickedAnswer === correct_answer
+    })
+
+
+    setCheckAnswer(prev =>
+        (
+            {
+              checkedAnswer: true,
+              number_of_correct_answers: correctQuestions.length
+            }
+        ))
+    const newArray = quizData.map(prev => ({...prev, checkedAnswer : true}))
+    setQuizData(newArray)
+
+  }
 
   React.useEffect(
     () => {
@@ -95,7 +120,10 @@ function App() {
         {
           gameStart
             &&
-            <button className="startButton">Check Answers</button>
+            <>
+            <div>you got {checkAnswer.number_of_correct_answers}/5 question correct</div>
+            <button className="checkAnswers" onClick={checkAnswers}>Check Answers</button>
+            </>
         }
 
       </div>

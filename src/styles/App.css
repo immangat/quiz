@@ -16,6 +16,16 @@
   font-size: 20px;
   padding: 2% 4%;
 }
+
+.checkAnswers{
+  border: none;
+  border-radius: 8px;
+  background-color: #4D5B9E;
+  font-size: 20px;
+  padding: 1% 2%;
+  margin-top: 2%;
+
+}
 .circle {
   width: 400px;
   height: 400px;
