@@ -22,7 +22,7 @@ function App() {
 
   function setUpQuestions(questions) {
 
-    const newArray = questions.map(prev => ({...prev, pickedAnswer : "", key : nanoid(), checkedAnswer : checkAnswer.checkedAnswer}))
+    const newArray = questions.map(prev => ({...prev, pickedAnswer : "", key : nanoid(), checkedAnswer : false}))
     setQuizData(newArray)
   }
 
@@ -70,19 +70,38 @@ function App() {
     setQuizData(newArray)
 
   }
+  
+  function reset() {
+      setCheckAnswer(prev =>
+          (
+              {
+                  checkedAnswer: false,
+                  number_of_correct_answers: 0
+              }
+          ))
+      setLoading(true)
+      setGameStart(false)
+      getQuizDataFromWeb();
 
-  React.useEffect(
-    () => {
-      if (!isInitialRender) {
+
+  }
+
+    function getQuizDataFromWeb() {
         fetch("https://opentdb.com/api.php?amount=5")
             .then(res => res.json())
             .then(data => {
-              setUpQuestions(data.results)
+                setUpQuestions(data.results)
             })
             .then(() => {
-              setLoading(false)
-              setGameStart(true)
+                setLoading(false)
+                setGameStart(true)
             })
+    }
+
+    React.useEffect(
+    () => {
+      if (!isInitialRender) {
+        getQuizDataFromWeb();
       } else {
         setIsInitialRender(false);
       }
@@ -99,7 +118,7 @@ function App() {
 
               <div className="startScreen">
                 <h1>Quizzical</h1>
-                <p>Test your kwowledge on general level question across different topics</p>
+                <p>Test your knowledge on general level question across different topics</p>
                 <button className="startButton" onClick={startGame}>Start Quiz</button>
               </div>
 
@@ -121,10 +140,14 @@ function App() {
           gameStart
             &&
             <>
-            <div>you got {checkAnswer.number_of_correct_answers}/5 question correct</div>
-            <button className="checkAnswers" onClick={checkAnswers}>Check Answers</button>
+            <div>
+                {checkAnswer.checkedAnswer ? `You got ${checkAnswer.number_of_correct_answers}/5 questions correct` : ""}
+            </div>
+            <button className="checkAnswers" onClick={checkAnswer.checkedAnswer ? reset : checkAnswers}>
+                {checkAnswer.checkedAnswer ? "Play Again" : "Check Answers"}
+            </button>
             </>
-        }
+            }
 
       </div>
 
