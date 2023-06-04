@@ -3,16 +3,16 @@ import './styles/App.css';
 import React from 'react';
 import {nanoid} from 'nanoid'
 import Question from './components/Question';
-import * as PropTypes from "prop-types";
-import StartScreen  from "./components/StartScreen";
+import Loader from "./components/Loader";
 
-
-StartScreen.propTypes = {onClick: PropTypes.func};
 
 function App() {
 
   const [gameStart, setGameStart] = React.useState(false)
   const [quizData, setQuizData] = React.useState([])
+  const [loading, setLoading] = React.useState(false)
+  const [startScreen, setStartScreen] = React.useState(true)
+  const [isInitialRender, setIsInitialRender] = React.useState(true);
 
 
   function setUpQuestions(questions) {
@@ -23,7 +23,8 @@ function App() {
 
 
   function startGame() {
-    setGameStart(true)
+    setStartScreen(false)
+    setLoading(true)
   }
 
   function setPickedAnswer(key, e) {
@@ -47,16 +48,28 @@ function App() {
 
   React.useEffect(
     () => {
-      fetch("https://opentdb.com/api.php?amount=5")
-      .then(res => res.json())
-      .then(data => setUpQuestions(data.results) )
-    },[])
+      if (!isInitialRender) {
+        fetch("https://opentdb.com/api.php?amount=5")
+            .then(res => res.json())
+            .then(data => {
+              setUpQuestions(data.results)
+            })
+            .then(() => {
+              setLoading(false)
+              setGameStart(true)
+            })
+      } else {
+        setIsInitialRender(false);
+      }
+
+
+    },[startScreen])
 
   return (
     <main className="App">
       <div className='app--content'>
         {
-          !gameStart &&
+          startScreen &&
 
               <div className="startScreen">
                 <h1>Quizzical</h1>
@@ -64,6 +77,11 @@ function App() {
                 <button className="startButton" onClick={startGame}>Start Quiz</button>
               </div>
 
+        }
+        {
+            loading
+            &&
+            <Loader />
         }
         {
           gameStart

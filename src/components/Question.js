@@ -19,6 +19,7 @@ export default function Question(props) {
             {
                 key: nanoid(),
                 option: option,
+                //this might be redundant
                 picked: question.pickedAnswer === option
             }
         )})
