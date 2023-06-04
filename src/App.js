@@ -67,6 +67,7 @@ function App() {
 
   return (
     <main className="App">
+
       <div className='app--content'>
         {
           startScreen &&
@@ -98,6 +99,9 @@ function App() {
         }
 
       </div>
+
+        <div className="circle" id="circle1"></div>
+        <div className="circle" id="circle2" ></div>
     </main>
   );
 }
