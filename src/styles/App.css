@@ -75,6 +75,25 @@
   justify-items: center;
 
 }
+.startScreen h1{
+  font-family: 'Karla', sans-serif;
+  color: #4D5B9E;
+
+}
+
+.startScreen p{
+  font-family: 'Inter', sans-serif;
+  color: #4D5B9E;
+
+}
+
+.startScreen button{
+  font-family: 'Inter', sans-serif;
+  color: white;
+  padding: 2% 9%;
+  border-radius: 15px;
+
+}
 
 
 @media (max-width: 1212px){
@@ -85,9 +104,18 @@
 
   .app--content{
     margin: 2%;
+    height: 100%;
   }
   .App{
       align-items: flex-start;
   }
+
+  .startScreen{
+    height: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+    align-items: center;
+   }
 }
 

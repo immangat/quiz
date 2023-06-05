@@ -4,6 +4,8 @@ import '../styles/option.css'
 function Option(props){
     const [isHover, setIsHover] = React.useState(false);
 
+    const parser = new DOMParser();
+    const decodedString = parser.parseFromString(`<!doctype html><body>${props.value}`, 'text/html').body.textContent;
     const handleMouseEnter = () => {
         setIsHover(true);
     };
@@ -38,7 +40,7 @@ function Option(props){
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            {props.value}
+            {decodedString}
         </button>
     )
 }
