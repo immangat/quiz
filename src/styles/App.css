@@ -103,9 +103,17 @@
   }
 
   .app--content{
+    position: relative;
     margin: 2%;
     height: 100%;
   }
+
+  .loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   }
   .App{
       align-items: flex-start;
   }
