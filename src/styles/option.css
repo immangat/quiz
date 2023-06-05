@@ -14,3 +14,10 @@
     border-radius: 12px;
     background-color: #D6DBF5;
 }
+
+
+@media (max-width: 1212px){
+   .options{
+       font-size : 15px;
+   }
+}

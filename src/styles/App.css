@@ -76,3 +76,18 @@
 
 }
 
+
+@media (max-width: 1212px){
+  .circle {
+    width: 200px;
+    height: 200px;
+  }
+
+  .app--content{
+    margin: 2%;
+  }
+  .App{
+      align-items: flex-start;
+  }
+}
+
