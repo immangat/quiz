@@ -139,14 +139,16 @@ function App() {
         {
           gameStart
             &&
-            <>
-            <div>
+            <div className="footer">
+            <p className="footer--answer">
                 {checkAnswer.checkedAnswer ? `You got ${checkAnswer.number_of_correct_answers}/5 questions correct` : ""}
+            </p>
+                <div className="footer--button">
+                    <button className="checkAnswers" onClick={checkAnswer.checkedAnswer ? reset : checkAnswers}>
+                        {checkAnswer.checkedAnswer ? "Play Again" : "Check Answers"}
+                    </button>
+                </div>
             </div>
-            <button className="checkAnswers" onClick={checkAnswer.checkedAnswer ? reset : checkAnswers}>
-                {checkAnswer.checkedAnswer ? "Play Again" : "Check Answers"}
-            </button>
-            </>
             }
 
       </div>

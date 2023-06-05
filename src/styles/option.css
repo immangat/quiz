@@ -4,6 +4,8 @@
     border-radius: 12px;
     margin-right: 2%;
     margin-top: 1%;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
 }
 
 .options:hover {

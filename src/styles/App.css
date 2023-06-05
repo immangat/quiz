@@ -19,11 +19,14 @@
 
 .checkAnswers{
   border: none;
-  border-radius: 8px;
+  border-radius: 15px;
   background-color: #4D5B9E;
   font-size: 20px;
-  padding: 1% 2%;
-  margin-top: 2%;
+  align-self: center;
+  padding: 4% 6%;
+  width: 150px;
+  color: white;
+
 
 }
 .circle {
@@ -50,4 +53,26 @@
   background-color: #DEEBF8;
 }
 
+.footer{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  margin-top: 1%;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer--answer{
+  margin-right: 2%;
+  display: inline-block;
+  color: #293264;
+  font-weight: bolder;
+}
+
+.footer--button{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+
+}
 
